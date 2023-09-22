@@ -1,4 +1,3 @@
-import { Main } from "next/document";
 import { useEffect, useState } from "react";
 
 const Endpoint = `https://rickandmortyapi.com/api/character/`;
@@ -69,7 +68,7 @@ export default function Home({ data }: any) {
   }
 
   return (
-    <Main>
+    <main>
       <div className="mx-10">
         <h1 className="flex justify-center font-bold">
           Rick And Morty Characters
@@ -122,6 +121,6 @@ export default function Home({ data }: any) {
           </button>
         </div>
       </div>
-    </Main>
+    </main>
   );
 }
