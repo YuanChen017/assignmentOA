@@ -1,3 +1,4 @@
+import { Main } from "next/document";
 import { useEffect, useState } from "react";
 
 const Endpoint = `https://rickandmortyapi.com/api/character/`;
@@ -68,55 +69,59 @@ export default function Home({ data }: any) {
   }
 
   return (
-    <div className="mx-10">
-      <h1 className="flex justify-center font-bold">
-        Rick And Morty Characters
-      </h1>
-      <div className="border flex flex-wrap gap-4 justify-evenly font-bold">
-        {results.map((item: { id: any; name: any; image: any }, index: any) => {
-          const { id, name, image } = item;
-          return (
-            <div key={`item+${index}`}>
-              <img src={image} alt={`${name} Thumbnail`} />
-              <h3 className="flex justify-center">{name}</h3>
-            </div>
-          );
-        })}
-      </div>
-      <div className="border flex gap-4 justify-evenly">
-        <button
-          onClick={handleLoadPrev}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 my-2 rounded"
-        >
-          prev
-        </button>
-        <div className="flex gap-10 overflow-x-scroll">
-          {allpage.map((ele, index) => {
-            return (
-              <div
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 my-2 rounded"
-                key={`page-${index}`}
-                onClick={() => {
-                  setPage(() => {
-                    return {
-                      current: Endpoint + `?page=${ele}`,
-                    };
-                  });
-                  setPagestart(ele);
-                }}
-              >
-                {ele}
-              </div>
-            );
-          })}
+    <Main>
+      <div className="mx-10">
+        <h1 className="flex justify-center font-bold">
+          Rick And Morty Characters
+        </h1>
+        <div className="border flex flex-wrap gap-4 justify-evenly font-bold">
+          {results.map(
+            (item: { id: any; name: any; image: any }, index: any) => {
+              const { id, name, image } = item;
+              return (
+                <div key={`item+${index}`}>
+                  <img src={image} alt={`${name} Thumbnail`} />
+                  <h3 className="flex justify-center">{name}</h3>
+                </div>
+              );
+            }
+          )}
         </div>
-        <button
-          onClick={handleLoadNext}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 my-2 rounded"
-        >
-          next
-        </button>
+        <div className="border flex gap-4 justify-evenly">
+          <button
+            onClick={handleLoadPrev}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 my-2 rounded"
+          >
+            prev
+          </button>
+          <div className="flex gap-10 overflow-x-scroll">
+            {allpage.map((ele, index) => {
+              return (
+                <div
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 my-2 rounded"
+                  key={`page-${index}`}
+                  onClick={() => {
+                    setPage(() => {
+                      return {
+                        current: Endpoint + `?page=${ele}`,
+                      };
+                    });
+                    setPagestart(ele);
+                  }}
+                >
+                  {ele}
+                </div>
+              );
+            })}
+          </div>
+          <button
+            onClick={handleLoadNext}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 my-2 rounded"
+          >
+            next
+          </button>
+        </div>
       </div>
-    </div>
+    </Main>
   );
 }
